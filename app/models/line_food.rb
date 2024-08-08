@@ -10,7 +10,7 @@ class LineFood < ApplicationRecord
   scope :other_restaurant, -> (picked_restaurant_id) { where.not(restaurant_id: picked_restaurant_id) }
 
   def total_amount
-    food.price * price
+    food.price * count 
   end
 
 end
