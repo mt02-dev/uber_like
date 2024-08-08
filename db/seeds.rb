@@ -7,3 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+3.times do |n|
+  restaurant = Restaurant.new(
+    name: "test_restaurant#{n}",
+    fee: 100,
+    time_required: 10
+  )
+
+  12.times do |m|
+    restaurant.foods.build(
+      name: "food_#{m}",
+      price: 500,
+      description: "food description#{m}"
+    )
+  end
+
+  restaurant.save!
+end
+
+

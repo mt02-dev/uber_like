@@ -1,4 +1,4 @@
-class Restaurants < ApplicationRecord
+class Restaurant < ApplicationRecord
   has_many :foods
   # この関連付けによりそのレストランにある商品が仮注文されているかどうかを簡単に取得できる
   has_many :line_foods, through: :foods
