@@ -10,8 +10,11 @@ import {
 import Restaurants from './containers/Restaurants' 
 import Orders from './containers/Orders' 
 import Foods from './containers/Foods' 
+import axios from 'axios'
+import { restaurantsIndex } from './urls'
 
 function App() {
+  // axios.get(restaurantsIndex).then((res) => console.log(res.data));
   return (
     <BrowserRouter>
 
