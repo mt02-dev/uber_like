@@ -9,7 +9,7 @@ import {
   initialState,
   lineFoodsActionTypes,
   lineFoodsReducer
-} from "../reducers/linefood"; 
+} from "../reducers/lineFood"; 
 import { orders } from "../urls";
 import MainLogo from '../images/logo.png';
 import { REQUEST_STATE } from "../constants";
