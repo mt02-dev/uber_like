@@ -16,8 +16,8 @@ class Api::V1::LineFoodsController < ApplicationController
 
   # restaurants/foods
   def create
-    other_restaurants = LineFood.active.other_restaurant(@ordered_food.restaurant.id)
-    if other_restaurants
+    other_restaurants = LineFood.active.other_restaurant(@ordered_food.restaurant_id)
+    unless other_restaurants.empty?
       return render json: {
         existing_restaurant: other_restaurants.first.restaurant.name,
         new_restaurant: Food.find(params[:food_id]).restaurant.name,
@@ -39,15 +39,17 @@ class Api::V1::LineFoodsController < ApplicationController
   def replace
     # active, other_restaurantはscope
     LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
-      line_food.update(:active,false)
+      line_food.update(active: false)
     end
+    Rails.logger.debug "Received params: #{params.inspect}"
+    Rails.logger.debug "Request body: #{request.body.read}"
 
     set_line_food(@ordered_food)
 
     if @line_food.save
       render json: {
         line_food: @line_food
-      }, status: created
+      }, status: :created
     else
       render json: {}, staus: :internal_server_error
     end
@@ -55,20 +57,20 @@ class Api::V1::LineFoodsController < ApplicationController
 
   private
   def set_food
-    @ordred_food = Food.find(parmas[:food_id])
+    @ordered_food = Food.find(params[:food_id])
   end
 
   def set_line_food(ordered_food)
     if ordered_food.line_food.present?
       @line_food = ordered_food.line_food
       @line_food.attributes = {
-        count: orderd_food.line_food.count + params[:count],
+        count: ordered_food.line_food.count + params[:count],
         active: true
       }
     else
-      @line_food = orderd_food.build_line_food(
+      @line_food = ordered_food.build_line_food(
         count: params[:count],
-        restaurant: ordered_food.restaurant
+        restaurant: ordered_food.restaurant,
         active: true
       )
     end
