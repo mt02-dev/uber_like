@@ -13,6 +13,29 @@ export const lineFoodsActionTypes = {
   POST_SUCCESS: 'POST_SUCCESS',
 }
 
-export const lineFoodReducer = (state: string, action: any) => {
-  switch(action.type)
+export const lineFoodsReducer = (state: any, action: any) => {
+  switch(action.type) {
+    case lineFoodsActionTypes.FETCHING:
+      return {
+        ...state,
+        fetchState: REQUEST_STATE.LOADING
+      };
+    case lineFoodsActionTypes.FETCH_SUCCESS:
+      return {
+        fetchState: REQUEST_STATE.OK,
+        lineFoodsSummary: action.payload.lineFoodsSummary
+      };
+    case lineFoodsActionTypes.POSTING:
+      return {
+        ...state,
+        postState: REQUEST_STATE.LOADING
+      };
+    case lineFoodsActionTypes.POST_SUCCESS:
+      return {
+        ...state,
+        postState: REQUEST_STATE.OK
+      }
+    default:
+      throw new Error();
+  }
 }
