@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .base-button {
+    @apply cursor-pointer focus:outline-none hover:opacity-70;
+  }
+
+  .round-button {
+    @apply base-button w-[42px] h-[42px] rounded-full border-none;
+  }
+
+  .order-button {
+    @apply base-button w-[390px] bg-[#000000] text-[#fff] border-none py-2 px-4
+  }
+}

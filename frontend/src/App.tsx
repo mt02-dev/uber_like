@@ -20,13 +20,12 @@ function App() {
 
       <Link to='/restaurants'>Restaurant List</Link>
       <Link to='/orders'>Order List</Link>
-      <Link to='/restaurants/:restaurantsId/foods'>Food List</Link>
 
       <Routes>
         <Route path='/restaurants' element={<Restaurants />} />
         <Route path='/orders' element={<Orders />} />
-        <Route path='/restaurants/:restaurantsId/foods' element={<Foods  />} />
-      </Routes> 
+        <Route path='/restaurants/:restaurantsId/foods' element={<Foods />} />
+      </Routes>
     </BrowserRouter>
   )
 }

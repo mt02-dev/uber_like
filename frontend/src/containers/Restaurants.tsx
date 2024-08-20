@@ -34,7 +34,7 @@ const Restaurants = () => {
             restaurants: data.restaurants
           }
         })
-      }, 3000);
+      }, 1000);
     });
   }, []);
   return (
@@ -67,9 +67,8 @@ const Restaurants = () => {
           })
         }
       </div>
-      
-    </Fragment> 
-  ) 
+    </Fragment>
+  )
 }
 
 export default Restaurants;
